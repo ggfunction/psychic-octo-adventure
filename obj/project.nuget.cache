@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SylSWwvLL4BW/W7emUbZJ1hNkw5EBRztrBT42dd5jAtnYF5t0TcCZjBL4H2CL08HJUgy3xuNPIOxU7W9qV5Viw==",
+  "dgSpecHash": "vCPqsxMv+axRtZEH74jaKwXsdZjqwo1QnL6Jy6+OfaD5J/OfRMQ3wyrWZcgqBeGpv4gKSUA9ncoQtn8zOhULzw==",
   "success": true,
-  "projectFilePath": "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
+  "projectFilePath": "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\master\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\master\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512"

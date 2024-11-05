@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj": {}
+    "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj": {}
   },
   "projects": {
-    "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj": {
+    "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
+        "projectUniqueName": "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
         "projectName": "Clipboard",
-        "projectPath": "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
+        "projectPath": "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\Clipboard.csproj",
         "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
-        "outputPath": "d:\\Users\\master\\Desktop\\2024GW\\clipboard\\obj\\",
+        "outputPath": "D:\\Users\\master\\Desktop\\2024GW\\clipboard\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

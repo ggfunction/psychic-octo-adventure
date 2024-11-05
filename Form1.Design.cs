@@ -27,10 +27,12 @@
 
             this.ListBox1 = new ListBox
             {
+                Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+                DisplayMember = "Content",
                 Location = new Point(0, 0),
                 Size = this.ClientSize,
-                Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
             };
+
             this.Controls.Add(this.ListBox1);
         }
     }
