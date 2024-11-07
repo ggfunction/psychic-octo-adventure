@@ -25,10 +25,13 @@
             this.Text = Application.ProductName;
             this.MaximizeBox = false;
 
+            var fontName = this.Font.Name;
+
             this.ListBox1 = new ListBox
             {
                 Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
                 DisplayMember = "Content",
+                Font = new Font(fontName, 15),
                 Location = new Point(0, 0),
                 Size = this.ClientSize,
             };

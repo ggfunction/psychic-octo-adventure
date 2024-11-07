@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using Memorandum.Threading;
     using Memorandum.UI;
 
     public partial class Form1 : Form
@@ -23,6 +24,31 @@
         {
             this.InitializeComponent();
 
+            var updateEntries = new Throttle<IDataObject>(
+                (data) =>
+            {
+                var text = data.GetData(DataFormats.Text);
+                var entry = new Entry()
+                {
+                    Content = text.ToString(),
+                    LastModified = DateTime.Now,
+                };
+
+                var index = this.entries.FindIndex(e => e.Content.Equals(text));
+                if (index == 0)
+                {
+                    return;
+                }
+                else if (index != -1)
+                {
+                    this.entries.RemoveAt(index);
+                }
+
+                this.entries.Insert(0, entry);
+                this.ListBox1.Items.Clear();
+                this.ListBox1.Items.AddRange(this.entries.ToArray());
+            }, 100);
+
             this.clipboardListener = new ClipboardListener(this.Handle);
             this.clipboardListener.ClipboardUpdated += (sender, e) =>
             {
@@ -33,12 +59,7 @@
 
                 if (e.DataObject.GetDataPresent(DataFormats.Text))
                 {
-                    var text = e.DataObject.GetData(DataFormats.Text);
-                    this.ListBox1.Items.Insert(0, new Entry()
-                    {
-                        Content = text.ToString(),
-                        LastModified = DateTime.Now,
-                    });
+                    updateEntries.Push(e.DataObject);
                 }
             };
 
