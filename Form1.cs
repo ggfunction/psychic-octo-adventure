@@ -7,6 +7,7 @@
     using System.Windows.Forms;
     using Memorandum.Threading;
     using Memorandum.UI;
+    using Newtonsoft.Json;
 
     public partial class Form1 : Form
     {
@@ -65,7 +66,10 @@
 
             this.ListBox1.MouseDown += (sender, e) =>
             {
-                this.dragStart = new Point(e.X, e.Y);
+                if (e.Button == MouseButtons.Left)
+                {
+                    this.dragStart = new Point(e.X, e.Y);
+                }
             };
 
             this.ListBox1.MouseMove += (sender, e) =>
@@ -77,7 +81,7 @@
 
             this.ListBox1.MouseUp += (sender, e) =>
             {
-                if (this.dragStart.HasValue)
+                if (this.dragStart.HasValue && e.Button == MouseButtons.Left)
                 {
                     this.dragStart = null;
                 }
@@ -85,8 +89,14 @@
                 var index = this.ListBox1.IndexFromPoint(new Point(e.X, e.Y));
                 if (index != ListBox.NoMatches)
                 {
-                    var entry = (Entry)this.ListBox1.Items[index];
-                    Clipboard.SetText(entry.Content);
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        var entry = (Entry)this.ListBox1.Items[index];
+                        Clipboard.SetText(entry.Content);
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                    }
                 }
             };
 
@@ -97,6 +107,45 @@
             this.ListBox1.DragDrop += (sender, e) =>
             {
             };
+
+            this.Shown += (s, e) => this.LoadEntries();
+            this.FormClosed += (s, e) => this.SaveEntries();
+        }
+
+        public void LoadEntries()
+        {
+            try
+            {
+                var text = System.IO.File.ReadAllText(@"content.json");
+                var list = JsonConvert.DeserializeObject<List<Entry>>(
+                    text);
+                this.entries.Clear();
+                this.entries.AddRange(list);
+                this.ListBox1.Items.AddRange(this.entries.ToArray());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        public void SaveEntries()
+        {
+            try
+            {
+                var text = JsonConvert.SerializeObject(
+                    this.entries,
+                    new JsonSerializerSettings()
+                    {
+                        ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
+                    });
+
+                System.IO.File.WriteAllText(@"content.json", text);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private class NativeMethods
