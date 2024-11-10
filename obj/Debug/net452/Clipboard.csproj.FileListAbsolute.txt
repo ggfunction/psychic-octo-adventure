@@ -1,0 +1,11 @@
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net452\Clipboard.exe.config
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net452\Clipboard.exe
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net452\Clipboard.pdb
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net452\Newtonsoft.Json.dll
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.csprojAssemblyReference.cache
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.AssemblyInfoInputs.cache
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.AssemblyInfo.cs
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.csproj.CoreCompileInputs.cache
+D:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.csproj.CopyComplete
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.exe
+d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net452\Clipboard.pdb

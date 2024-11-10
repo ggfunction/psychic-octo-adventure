@@ -1,11 +1,11 @@
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.exe.config
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.exe
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.pdb
+d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Newtonsoft.Json.dll
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.csprojAssemblyReference.cache
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.AssemblyInfoInputs.cache
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.AssemblyInfo.cs
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.csproj.CoreCompileInputs.cache
-d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.exe.config
-d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.exe
-d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Clipboard.pdb
+D:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.csproj.CopyComplete
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.exe
 d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.pdb
-d:\Users\master\Desktop\2024GW\clipboard\obj\Debug\net48\Clipboard.csproj.CopyComplete
-d:\Users\master\Desktop\2024GW\clipboard\bin\Debug\net48\Newtonsoft.Json.dll

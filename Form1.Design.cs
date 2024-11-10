@@ -33,7 +33,8 @@
                 DisplayMember = "Content",
                 Font = new Font(fontName, 15),
                 Location = new Point(0, 0),
-                Size = this.ClientSize,
+                ClientSize = this.ClientSize,
+                //// DrawMode = DrawMode.OwnerDrawFixed,
             };
 
             this.Controls.Add(this.ListBox1);

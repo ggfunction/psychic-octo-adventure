@@ -92,7 +92,14 @@
                     if (e.Button == MouseButtons.Left)
                     {
                         var entry = (Entry)this.ListBox1.Items[index];
-                        Clipboard.SetText(entry.Content);
+                        try
+                        {
+                            Clipboard.SetText(entry.Content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
                     }
                     else if (e.Button == MouseButtons.Right)
                     {
@@ -108,6 +115,10 @@
             {
             };
 
+            this.ListBox1.DrawItem += (s, e) =>
+            {
+            };
+
             this.Shown += (s, e) => this.LoadEntries();
             this.FormClosed += (s, e) => this.SaveEntries();
         }
@@ -120,8 +131,10 @@
                 var list = JsonConvert.DeserializeObject<List<Entry>>(
                     text);
                 this.entries.Clear();
-                this.entries.AddRange(list);
-                this.ListBox1.Items.AddRange(this.entries.ToArray());
+                this.entries.AddRange(list.Where(e => !e.Pinned));
+                this.pinnedEntries.Clear();
+                this.pinnedEntries.AddRange(list.Where(e => e.Pinned));
+                this.ListBox1.Items.AddRange(this.pinnedEntries.Concat(this.entries).ToArray());
             }
             catch (Exception ex)
             {
@@ -133,8 +146,9 @@
         {
             try
             {
+                var list = this.pinnedEntries.Concat(this.entries);
                 var text = JsonConvert.SerializeObject(
-                    this.entries,
+                    list,
                     new JsonSerializerSettings()
                     {
                         ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
