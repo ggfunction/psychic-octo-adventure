@@ -31,6 +31,7 @@
             {
                 Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
                 DisplayMember = "Content",
+                DataSource = this.dataList.GetBindingSource(),
                 Font = new Font(fontName, 15),
                 Location = new Point(0, 0),
                 ClientSize = this.ClientSize,

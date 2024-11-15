@@ -7,15 +7,12 @@
     using System.Windows.Forms;
     using Memorandum.Threading;
     using Memorandum.UI;
-    using Newtonsoft.Json;
 
     public partial class Form1 : Form
     {
         private readonly ClipboardListener clipboardListener;
 
-        private readonly List<Entry> entries = new List<Entry>();
-
-        private readonly List<Entry> pinnedEntries = new List<Entry>();
+        private readonly DataList dataList = new DataList();
 
         private readonly object lockObject = new object();
 
@@ -35,23 +32,17 @@
                     LastModified = DateTime.Now,
                 };
 
-                var index = this.entries.FindIndex(e => e.Content.Equals(text));
-                if (index == 0)
+                if (this.dataList.Add(entry))
                 {
-                    return;
+                    if (this.ListBox1.SelectedIndex != ListBox.NoMatches)
+                    {
+                        this.ListBox1.SelectedIndex = 0;
+                    }
                 }
-                else if (index != -1)
-                {
-                    this.entries.RemoveAt(index);
-                }
-
-                this.entries.Insert(0, entry);
-                this.ListBox1.Items.Clear();
-                this.ListBox1.Items.AddRange(this.entries.ToArray());
             }, 100);
 
             this.clipboardListener = new ClipboardListener(this.Handle);
-            this.clipboardListener.ClipboardUpdated += (sender, e) =>
+            this.clipboardListener.ClipboardUpdated += (s, e) =>
             {
                 if (NativeMethods.GetForegroundWindow() == this.Handle)
                 {
@@ -64,7 +55,7 @@
                 }
             };
 
-            this.ListBox1.MouseDown += (sender, e) =>
+            this.ListBox1.MouseDown += (s, e) =>
             {
                 if (e.Button == MouseButtons.Left)
                 {
@@ -72,14 +63,14 @@
                 }
             };
 
-            this.ListBox1.MouseMove += (sender, e) =>
+            this.ListBox1.MouseMove += (s, e) =>
             {
                 if (this.dragStart.HasValue)
                 {
                 }
             };
 
-            this.ListBox1.MouseUp += (sender, e) =>
+            this.ListBox1.MouseUp += (s, e) =>
             {
                 if (this.dragStart.HasValue && e.Button == MouseButtons.Left)
                 {
@@ -107,59 +98,36 @@
                 }
             };
 
-            this.ListBox1.DragOver += (sender, e) =>
+            this.ListBox1.DragOver += (s, e) =>
             {
             };
 
-            this.ListBox1.DragDrop += (sender, e) =>
+            this.ListBox1.DragDrop += (s, e) =>
             {
             };
 
             this.ListBox1.DrawItem += (s, e) =>
             {
+                if (e.Index == ListBox.NoMatches)
+                {
+                    return;
+                }
             };
 
-            this.Shown += (s, e) => this.LoadEntries();
-            this.FormClosed += (s, e) => this.SaveEntries();
-        }
-
-        public void LoadEntries()
-        {
-            try
+            this.ListBox1.KeyDown += (s, e) =>
             {
-                var text = System.IO.File.ReadAllText(@"content.json");
-                var list = JsonConvert.DeserializeObject<List<Entry>>(
-                    text);
-                this.entries.Clear();
-                this.entries.AddRange(list.Where(e => !e.Pinned));
-                this.pinnedEntries.Clear();
-                this.pinnedEntries.AddRange(list.Where(e => e.Pinned));
-                this.ListBox1.Items.AddRange(this.pinnedEntries.Concat(this.entries).ToArray());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-
-        public void SaveEntries()
-        {
-            try
-            {
-                var list = this.pinnedEntries.Concat(this.entries);
-                var text = JsonConvert.SerializeObject(
-                    list,
-                    new JsonSerializerSettings()
+                if (e.KeyCode == Keys.Delete)
+                {
+                    var index = this.ListBox1.SelectedIndex;
+                    if (index != ListBox.NoMatches)
                     {
-                        ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
-                    });
+                        this.dataList.RemoveAt(index);
+                    }
+                }
+            };
 
-                System.IO.File.WriteAllText(@"content.json", text);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            this.Shown += (s, e) => this.dataList.Load();
+            this.FormClosed += (s, e) => this.dataList.Save();
         }
 
         private class NativeMethods
