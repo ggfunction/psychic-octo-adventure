@@ -27,15 +27,16 @@
 
             var fontName = this.Font.Name;
 
-            this.ListBox1 = new ListBox
+            this.ListBox1 = new BufferedListBox
             {
                 Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
                 DisplayMember = "Content",
                 DataSource = this.dataList.GetBindingSource(),
                 Font = new Font(fontName, 15),
+                ItemHeight = new Font(fontName, 15).Height,
                 Location = new Point(0, 0),
                 ClientSize = this.ClientSize,
-                //// DrawMode = DrawMode.OwnerDrawFixed,
+                DrawMode = DrawMode.OwnerDrawFixed,
             };
 
             this.Controls.Add(this.ListBox1);

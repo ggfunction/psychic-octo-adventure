@@ -49,6 +49,8 @@
                     return;
                 }
 
+                this.ListBox1.SelectedIndex = ListBox.NoMatches;
+
                 if (e.DataObject.GetDataPresent(DataFormats.Text))
                 {
                     updateEntries.Push(e.DataObject);
@@ -112,6 +114,26 @@
                 {
                     return;
                 }
+
+                var item = (Entry)this.ListBox1.Items[e.Index];
+                var content = item.Content.ToString();
+                var font = item.Pinned ? new Font(this.ListBox1.Font, FontStyle.Bold) : this.ListBox1.Font;
+                var textColor = SystemBrushes.ControlText;
+
+                e.DrawBackground();
+
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                {
+                    e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+                    textColor = SystemBrushes.HighlightText;
+                }
+
+                if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+                {
+                    e.DrawFocusRectangle();
+                }
+
+                e.Graphics.DrawString(content, font, textColor, e.Bounds);
             };
 
             this.ListBox1.KeyDown += (s, e) =>
