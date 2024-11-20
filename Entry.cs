@@ -11,5 +11,7 @@ namespace Clipboard
         public DateTime LastModified { get; set; }
 
         public bool Pinned { get; set; }
+
+        public bool Protected { get; set; }
     }
 }

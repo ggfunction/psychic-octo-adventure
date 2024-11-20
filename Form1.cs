@@ -82,9 +82,9 @@
                 var index = this.ListBox1.IndexFromPoint(new Point(e.X, e.Y));
                 if (index != ListBox.NoMatches)
                 {
+                    var entry = (Entry)this.ListBox1.Items[index];
                     if (e.Button == MouseButtons.Left)
                     {
-                        var entry = (Entry)this.ListBox1.Items[index];
                         try
                         {
                             Clipboard.SetText(entry.Content);
@@ -96,6 +96,8 @@
                     }
                     else if (e.Button == MouseButtons.Right)
                     {
+                        entry.Pinned = !entry.Pinned;
+                        this.ListBox1.Invalidate();
                     }
                 }
             };

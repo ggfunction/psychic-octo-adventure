@@ -25,18 +25,18 @@
             this.Text = Application.ProductName;
             this.MaximizeBox = false;
 
-            var fontName = this.Font.Name;
+            var font = new Font(this.Font.Name, 15);
 
             this.ListBox1 = new BufferedListBox
             {
                 Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
-                DisplayMember = "Content",
-                DataSource = this.dataList.GetBindingSource(),
-                Font = new Font(fontName, 15),
-                ItemHeight = new Font(fontName, 15).Height,
-                Location = new Point(0, 0),
                 ClientSize = this.ClientSize,
+                DataSource = this.dataList.GetBindingSource(),
+                DisplayMember = "Content",
                 DrawMode = DrawMode.OwnerDrawFixed,
+                Font = font,
+                ItemHeight = font.Height,
+                Location = new Point(0, 0),
             };
 
             this.Controls.Add(this.ListBox1);

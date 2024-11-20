@@ -32,6 +32,7 @@ namespace Clipboard
             }
 
             temporary.Insert(0, entry);
+
             try
             {
                 this.entries.RaiseListChangedEvents = false;
