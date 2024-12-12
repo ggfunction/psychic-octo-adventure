@@ -85,14 +85,7 @@
                     var entry = (Entry)this.ListBox1.Items[index];
                     if (e.Button == MouseButtons.Left)
                     {
-                        try
-                        {
-                            Clipboard.SetText(entry.Content);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex);
-                        }
+                        this.SetEntryToClipboard();
                     }
                     else if (e.Button == MouseButtons.Right)
                     {
@@ -148,10 +141,35 @@
                         this.dataList.RemoveAt(index);
                     }
                 }
+
+                switch (e.KeyCode)
+                {
+                    case Keys.Enter:
+                        this.SetEntryToClipboard();
+                        break;
+                }
             };
 
             this.Shown += (s, e) => this.dataList.Load();
             this.FormClosed += (s, e) => this.dataList.Save();
+        }
+
+        private void SetEntryToClipboard()
+        {
+            var sb = new System.Text.StringBuilder();
+            foreach (Entry item in this.ListBox1.SelectedItems)
+            {
+                sb.Append(item.Content);
+            }
+
+            try
+            {
+                Clipboard.SetText(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private class NativeMethods
